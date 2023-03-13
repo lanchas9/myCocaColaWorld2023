@@ -1,0 +1,139 @@
+@font-face {
+    font-family: "Gotham";
+    src: url('../fonts/GOTHAM-BLACK.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url('../fonts/Montserrat-Regular.otf') format('truetype');
+}
+body{
+    background-color: #E6EEF2;
+    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+    color: #1E1E1E;
+}
+
+.cuerpo{
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    background-color: white;
+    border-radius: 40px;
+    max-width: 900px;
+}
+
+.imagenEncabezado{
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 95%;
+}
+
+.encabezado{
+    text-align: center;
+}
+
+.titulo{
+    font-weight: bold;
+    font-size: x-large;
+    color: #1E1E1E;
+}
+
+
+.divisionArriba{
+    color: #F40009;
+    background-color: #F40009;
+    height: 10px;
+    margin-left: 0%;
+    margin-right: 10%;
+    margin-bottom: 0px;
+    margin-top: 5%;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.divisionAbajo{
+    color: #F40009;
+    background-color: #F40009   ;
+    height: 10px;
+    margin-left: 0%;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: none;
+}
+.detalleEvento{
+    margin-left: 5%;
+    font-family: "Montserrat", Calibri, Tahoma, sans-serif;
+    font-size: 20px;
+}
+.margenDerecho{
+    margin-right: 5%;
+}
+
+.obligatoriosdiv{
+    text-align: right;
+    margin-right: 9%;
+    margin-top: 1%;
+}
+.obligatorios{
+    font-weight: bold;
+    font-style: italic;
+    color: #F40009;
+}
+
+.elmentoFormularioTitulo{
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 5px;
+}
+
+.asterisc {
+    color: #F40009;
+    font-size: larger;
+}
+
+.elmentoFormularioinput{
+    width: 90%;
+    margin-top: 0px;
+    height: 40px;
+    background-color: #F7F7F7;
+    border: 1px solid #c4c4c4;
+    border-radius: 0;
+    box-shadow: none;
+    color: #787878;
+    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+}
+.error{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.botonRegistrarse{
+    background: #F40009;
+    border: 0;
+    color: #f7f7f7;
+    height: 50px;
+    margin-left: 5%;
+    margin-top: 0%;
+    font-size: 20px;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+}
+
+.imagenMonedas{
+    display: block;
+    max-width: 300px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tituloNumeroMonedas{
+    font-weight: bold;
+    font-size: xx-large;
+    color: #F40009;
+    display: block;
+    text-align: center;
+}
