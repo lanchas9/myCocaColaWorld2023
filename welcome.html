@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head onload="cargaDatos()">
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyCocaColaWorld2023</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body onload="cargaDatos()">
   <div class="cuerpo">  
     <div class="encabezado">
         <img src="img/header.png" class="imagenEncabezado"/>
@@ -19,8 +19,10 @@
     <div class="detalleEvento"> 
         <hr class="divisionArriba">
         <div class="margenDerecho">
-            Bienvenidos al portal donde encontrarás tus puntos recolectados durante tu visita a nuestro stand.
-        <br><br>
+            Bienvenido: <b id="nombreCompleto"></b>  
+        </div>
+        <div class="margenDerecho">
+            Este es el portal donde encontrarás tus puntos recolectados durante tu visita a nuestro stand.
         </div>
         <hr class="divisionAbajo">
     </div>
@@ -39,8 +41,42 @@
     </div>
     <br><br><br>
     <script>
-        function cargaDatos(){
-            
+        let nombreCompleto = ""
+        async function cargaDatos(){
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            let uuid = urlParams.get('uuid');
+            let numPuntos = urlParams.get('numPuntos');
+            console.log({uuid})
+            console.log({numPuntos})
+            dataJson = {
+                uuid : uuid
+            }
+
+            const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    JSON.stringify(dataJson)
+            };
+                            
+            try {
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/dameUsuarioByUUID`, settings);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    nombreCompleto = data.message[0].nombreCompleto
+                    document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
         }
 
     </script>
