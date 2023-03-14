@@ -22,13 +22,13 @@
             Bienvenido: <b id="nombreCompleto"></b>  
         </div>
         <div class="margenDerecho">
-            Este es el portal donde encontrarás tus puntos recolectados durante tu visita a nuestro stand.
+            Gracias por escanear el código QR en una de nuestras experiencias.
         </div>
         <hr class="divisionAbajo">
     </div>
     <img src="img/muchasMonedas.webp" alt="" class="imagenMonedas">
     <div class="imagenMonedas">
-        Tu total hasta el momento es de:
+        Agregaste la cantidad de:
         <br><br>
     </div>
     <div class="tituloNumeroMonedas" id="numTotalMonedas">
@@ -37,7 +37,7 @@
     <br><br>
     <div class="encabezado">
         <div class="titulo">
-            Participa en más experiencias para ganar más puntos y así poderlos cambiar por increibles premios</div>   
+            Sigue participando en más experiencias, para ganar más puntos y así poderlos cambiar por increibles premios.</div>   
     </div>
     <br><br><br>
     <script>
@@ -45,12 +45,13 @@
         async function cargaDatos(){
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            let uuid = urlParams.get('uuid');
-            //let numPuntos = urlParams.get('numPuntos');
-            console.log({uuid})
-            //console.log({numPuntos})
+            let uuidExperiencias = urlParams.get('uuidExperiencias');
+            let numPuntos = urlParams.get('numPuntos');
+            console.log({uuidExperiencias})
+            console.log({numPuntos})
+            document.getElementById("numTotalMonedas").innerHTML = "uuidExperiencias: " + uuidExperiencias + " con " + numPuntos + " puntos"
             dataJson = {
-                uuid : uuid
+                uuidExperiencias : uuidExperiencias
             }
 
             const settings = {
@@ -64,7 +65,7 @@
             };
                             
             try {
-                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/dameUsuarioByUUID`, settings);
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/sumaPuntos`, settings);
                 const data = await fetchResponse.json();
                 resul = data.statusCode
                 if(resul == 200){
