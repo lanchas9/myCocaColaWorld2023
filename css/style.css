@@ -14,7 +14,7 @@ body{
 }
 
 .cuerpo{
-    width: 80%;
+    width: 94%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -38,6 +38,8 @@ body{
     font-weight: bold;
     font-size: x-large;
     color: #1E1E1E;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 
@@ -123,6 +125,21 @@ body{
     font-family: "Gotham", Calibri, Tahoma, sans-serif;
 }
 
+.botonContinuar{
+    background: #F40009;
+    border: 0;
+    color: #f7f7f7;
+    height: 50px;
+    width: 20%;
+    max-width: 300px;
+    margin-left: 40%;
+    margin-top: 0%;
+    font-size: 20px;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+}
+
 .imagenMonedas{
     display: block;
     max-width: 300px;
@@ -137,3 +154,23 @@ body{
     display: block;
     text-align: center;
 }
+
+.rojo{
+    color: #F40009;
+}
+
+.renglonTablaExperiencias{
+    margin-left: 5%;
+	font-size: normal;
+	font-weight: normal;
+	text-align: left;
+	color: #1E1E1E;
+	margin-bottom: 0%;
+	width: 90%;
+    margin-left: 5%;
+    list-style: none;
+    padding-bottom: 10px;
+    font-family: "Montserrat", Calibri, Tahoma, sans-serif;
+}
+
+li:nth-child(odd) { color: #F40009; }

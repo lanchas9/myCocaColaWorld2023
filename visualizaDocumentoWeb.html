@@ -22,7 +22,18 @@
             Bienvenido: <b id="nombreCompleto"></b>  
         </div>
         <div class="margenDerecho">
-            Gracias por escanear el código QR en una de nuestras experiencias.
+            Gracias por escanear el código QR a continuación requieres descargar la presentación en formato PDF para ganar puntos en esta actividad.
+        </div>
+        <div id="elementoClickeableLinkWeb">
+            <br>
+            <div class="margenDerecho encabezado">
+                <a id="linkWeb" href="" download>
+                    <b class="">
+                        ➡️ 🗎 MyCocaColaWorld2023.pdf
+                    </b>
+                </a>
+            </div>
+            <br>
         </div>
         <hr class="divisionAbajo">
     </div>
@@ -37,11 +48,11 @@
     <br><br>
     <div class="encabezado">
         <div class="titulo">
-            En total tienes: <b id="totalPuntos"></b> puntos
+            <!-- En total tienes: <b id="totalPuntos"></b> puntos -->
         <br>Sigue participando en más experiencias, para ganar más puntos y así poderlos cambiar por increibles premios.</div>   
     </div>
     <br>
-    <button class="botonRegistrarse" onclick="regresarWelome()">&ensp;&ensp;Continuar&ensp;&ensp;</button>
+    <button class="botonContinuar" onclick="regresarWelome()">&ensp;&ensp;Continuar&ensp;&ensp;</button>
     <br>
     <script src="js/cookie.js"></script>
     <script>
@@ -54,11 +65,31 @@
             window.location.href = `welcome.html`
         }
 
+        async function dameExperiencia(){
+                            
+            try {
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/dameExperiencias?uuidExperiencias=${uuidExperiencias}`);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    let urlExperiencias = data.message[0].urlExperiencias
+                    document.getElementById("linkWeb").href = urlExperiencias 
+                }else{
+                    console.log("Puntos ya agregados: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
+        }
+        
+        let uuidExperiencias = "";
+        let numPuntos = "";
         async function cargaDatos(){
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            let uuidExperiencias = urlParams.get('uuidExperiencias');
-            let numPuntos = urlParams.get('numPuntos');
+            uuidExperiencias = urlParams.get('uuidExperiencias');
+            numPuntos = urlParams.get('numPuntos');
             console.log({uuidExperiencias})
             console.log({numPuntos})
 
@@ -67,7 +98,8 @@
                 window.location.href = `index.html?uuidExperiencias=${uuidExperiencias}&numPuntos=${numPuntos}`
             }
             
-            document.getElementById("numTotalMonedas").innerHTML = "uuidExperiencias: " + uuidExperiencias + " con " + numPuntos + " puntos"
+            // document.getElementById("numTotalMonedas").innerHTML = "uuidExperiencias: " + uuidExperiencias + " con " + numPuntos + " puntos
+            document.getElementById("numTotalMonedas").innerHTML = numPuntos + " puntos"
             dataJson = {
                 "uuidUsuarios": uuidUsuarios,
                 "uuidExperiencias": uuidExperiencias,
@@ -97,7 +129,7 @@
             } catch (e) {
                 console.log("Error:" + e)
             }
-
+            dameExperiencia()
         }
 
     </script>

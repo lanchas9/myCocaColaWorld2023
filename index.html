@@ -10,7 +10,7 @@
 <body onload="cargaDatos()">
   <div class="cuerpo">  
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado"/>
+        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
         <div class="titulo">Registro de invitados a "My Coca Cola World 2023"</div>
@@ -30,11 +30,11 @@
         </div>
     </div>
     <br>
-    <div class="espaciador titulo error" id="mensajeError"></div>
+    <div class="espaciador titulo error rojo" id="mensajeError"></div>
     <br>
     <button class="botonRegistrarse" onclick="guardaDatos()">&ensp;&ensp;Guardar Registro&ensp;&ensp;</button>
 </div>
-
+    <script src="js/cookie.js"></script>
     <script type="text/javascript">
         let urlServer = "https://mosaico.app:4000/myCocaColaWorld2023/"
         let tipoValidaciones = { 
@@ -48,8 +48,25 @@
     
         let arrayPreguntasServer = [];
         let arrayPreguntasHtml = [];
-        
+        let uuidExperiencias = "";
+        let numPuntos = "";
+        let botonGuardarDatos = false;
+
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+
         async function cargaDatos(){
+            let uuidUsuarios = getCookie("uuidUsuarios")
+            if(uuidUsuarios != ""){
+                window.location.href = `welcome.html`
+            }
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            uuidExperiencias = urlParams.get('uuidExperiencias');
+            numPuntos = urlParams.get('numPuntos');
+
            try{ 
                 let datos = await fetch(urlServer + "dameEstructuraRegistro")
                 let json = await datos.json()
@@ -89,32 +106,47 @@
         }
 
         async function guardaDatos(){
-        let hayErrror = false;
-        
-        arrayPreguntasServer.forEach(element => {
-            if(!hayErrror){
-                let valor = document.getElementById(`elementoFormulario${element.idEstructuraPreguntas}`);
-                let dato = valor.value.trim()
-                let resultadoStr = validaElemento(dato, element.textoTipoValidaciones, element.tooltipEstructuraPreguntas, element.obligatorioEstructuraPreguntas);
-                if(resultadoStr == ""){
-                    let key = `{"${element.tituloEstructuraPreguntas}" : "${dato}"}`;
-                    datosRegistro =  Object.assign(datosRegistro, JSON.parse(key));
-                     
+            if (botonGuardarDatos == true){
+                console.log("salimos por doble click al boton guardar")
+                return;
+            }
+            botonGuardarDatos = true;
+            let hayErrror = false;
+            
+            arrayPreguntasServer.forEach(element => {
+                if(!hayErrror){
+                    let valor = document.getElementById(`elementoFormulario${element.idEstructuraPreguntas}`);
+                    let dato = valor.value.trim()
+                    let resultadoStr = validaElemento(dato, element.textoTipoValidaciones, element.tooltipEstructuraPreguntas, element.obligatorioEstructuraPreguntas);
+                    if(resultadoStr == ""){
+                        let key = `{"${element.tituloEstructuraPreguntas}" : "${dato}"}`;
+                        datosRegistro =  Object.assign(datosRegistro, JSON.parse(key));
+                            
+                    }else{
+                        hayErrror=true
+                        document.getElementById("mensajeError").innerHTML = resultadoStr
+                    }
+                }
+            })
+            if (!hayErrror){
+                let resul = await guardaEnServer(datosRegistro);
+                if (resul.error == false){
+                    let uuidUsuarios = resul.uuidUsuarios
+                    setCookie("uuidUsuarios", uuidUsuarios, 10)
+                    if((uuidExperiencias === null) && (numPuntos === null) ){
+                        window.location.href = `welcome.html`
+                    }else if((uuidExperiencias != "") && (numPuntos != "") ){
+                        window.location.href = `sumaPuntos.html?uuidExperiencias=${uuidExperiencias}&numPuntos=${numPuntos}`
+                    }else{
+                        window.location.href = `welcome.html`
+                    }
+                    
                 }else{
-                    hayErrror=true
-                    document.getElementById("mensajeError").innerHTML = resultadoStr
+                    document.getElementById("mensajeError").innerHTML = resul.message
                 }
             }
-        })
-        if (!hayErrror){
-            let resul = await guardaEnServer(datosRegistro);
-            if (resul.error == false){
-                window.location.href = `welcome.html?uuid=${resul.uuid}`
-            }else{
-                document.getElementById("mensajeError").innerHTML = resul.message
-            }
+            botonGuardarDatos = false;
         }
-    }
 
     async function guardaEnServer(datosRegistro){
         let resul = {
@@ -122,7 +154,7 @@
             message: "",
             idUsuario: 0,
             statusCode: 0,
-            uuid : ""
+            uuidUsuarios : ""
         }
         const data = datosRegistro
         const dataJson = JSON.stringify(data)
@@ -146,7 +178,7 @@
                 resul.statusCode = data.statusCode
                 resul.idUsuario = data.message.insertId
                 resul.message = data.message
-                resul.uuid = data.message.uuid
+                resul.uuidUsuarios = data.message.uuidUsuarios
             }else{                        
                 resul.statusCode = data.statusCode
                 resul.message = data.message

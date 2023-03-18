@@ -10,7 +10,7 @@
 <body onload="cargaDatos()">
   <div class="cuerpo">  
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado"/>
+        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
         <div class="titulo">Portal "My Coca Cola World 2023"</div>
@@ -28,29 +28,37 @@
     </div>
     <img src="img/muchasMonedas.webp" alt="" class="imagenMonedas">
     <div class="imagenMonedas">
-        Tu total hasta el momento es de:
+        Tu total de puntos hasta el momento es de:
         <br><br>
     </div>
     <div class="tituloNumeroMonedas" id="numTotalMonedas">
-        0 puntos
+        <b id="puntosTotales">0</b>  puntos
     </div>
     <br><br>
+    <div class="imagenMonedas">
+        Aquí el desgloce de tus puntos por cada experiencia:
+    </div>
+    <div id="tablaPuntos"></div>
     <div class="encabezado">
         <div class="titulo">
             Participa en más experiencias para ganar más puntos y así poderlos cambiar por increibles premios</div>   
     </div>
     <br><br><br>
+    <script src="js/cookie.js"></script>
     <script>
         let nombreCompleto = ""
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+
         async function cargaDatos(){
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            let uuid = urlParams.get('uuid');
+            let uuidUsuarios = getCookie("uuidUsuarios")
+
             //let numPuntos = urlParams.get('numPuntos');
-            console.log({uuid})
+            console.log({uuidUsuarios})
             //console.log({numPuntos})
             dataJson = {
-                uuid : uuid
+                uuidUsuarios : uuidUsuarios
             }
 
             const settings = {
@@ -70,6 +78,32 @@
                 if(resul == 200){
                     nombreCompleto = data.message[0].nombreCompleto
                     document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                    let puntosTotales = data.message[0].puntosTotales
+                    document.getElementById("puntosTotales").innerHTML = puntosTotales === null ? "0" : puntosTotales
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
+            try {
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/tablaPuntos`, settings);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    let tabla = data.message
+                    let tablaExperiencias = document.createElement("ul")
+                    let contador = 0
+                    tabla.forEach(element => {
+                        contador = element.idExperiencias
+                        let renglon = document.createElement("li")
+                        renglon.innerHTML = element.descripcionExperiencias + "  ➡  " + (element.puntosExperiencias === null ? 0 : element.puntosExperiencias) + " puntos"
+                        renglon.className = "renglonTablaExperiencias"
+                        tablaExperiencias.appendChild(renglon)
+                    });
+                    document.getElementById("tablaPuntos").appendChild(tablaExperiencias)
+                    
                 }else{
                     console.log("Error: " + data.message)
                 }
