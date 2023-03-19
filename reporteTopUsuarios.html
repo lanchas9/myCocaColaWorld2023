@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCocaColaWorld2023</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="cargaDatos()">
+  <div class="cuerpo">  
+    <div class="encabezado">
+        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <br>
+		<!-- <hr class="lineaAzul"/> -->
+        <div class="titulo">Portal "My Coca Cola World 2023"</div>
+    </div>
+      
+    <div class="detalleEvento"> 
+        <hr class="divisionArriba">
+        <div class="margenDerecho">
+            <b id="nombreCompleto">Reporte</b>  
+        </div><br>
+        <div class="margenDerecho">
+            Usuarios con más puntos ganados
+        </div>
+        <hr class="divisionAbajo">
+    </div>
+    <div id="tablaPuntos"></div>
+    <br><br><br>
+    <script src="js/cookie.js"></script>
+    <script>
+        let nombreCompleto = ""
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+
+        async function cargaDatos(){
+                         
+            try {
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/reporteTopUsuariosConPuntos`);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    let tabla = data.message
+                    let tablaExperiencias = document.createElement("ul")
+                    
+                    tabla.forEach(element => {
+                        
+                        let renglon = document.createElement("li")
+                        renglon.innerHTML = element.nombreCompleto + " - " + element.nombreEmpresa + "  ➡  " + (element.puntosTotales === null ? 0 : element.puntosTotales) + " puntos"
+                        renglon.className = "renglonTablaExperiencias"
+                        tablaExperiencias.appendChild(renglon)
+                    });
+                    document.getElementById("tablaPuntos").appendChild(tablaExperiencias)
+                    
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
+        }
+
+    </script>
+</div>
+    
+</body>
+</html>
