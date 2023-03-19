@@ -174,3 +174,18 @@ body{
 }
 
 li:nth-child(odd) { color: #F40009; }
+
+.qr{
+	width: 30%;
+	margin-left: 35%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+
+
+.qr2{
+    padding-top: 0px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
