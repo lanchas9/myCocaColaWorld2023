@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "TCCC-UnityHeadline-Bold";
+    src: url('../fonts/TCCC-UnityHeadline-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "TCCC-UnityText-Regular";
+    src: url('../fonts/TCCC-UnityText-Regular.ttf') format('truetype');
+}
+
 body {
     background-color: white;
     margin: 0px;
@@ -8,6 +18,13 @@ body {
 
 .display{
     display: block;
+}
+
+
+.imagenEncabezado{
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 90%;
 }
 
   .centrado{
