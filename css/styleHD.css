@@ -1,0 +1,79 @@
+@font-face {
+    font-family: "TCCC-UnityHeadline-Bold";
+    src: url('../fonts/TCCC-UnityHeadline-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "TCCC-UnityText-Regular";
+    src: url('../fonts/TCCC-UnityText-Regular.ttf') format('truetype');
+}
+body{
+    color: #1E1E1E;
+    background: url(../img/trivia/Inicio_back.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  overflow: hidden;
+}
+
+.encabezado{
+    text-align: center;
+}
+.imagenEncabezado{
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 70%;
+}
+.titulo{
+    font-weight: bold;
+    font-size: xx-large;
+    color: #1E1E1E;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 5%;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
+}
+
+.tituloChico{
+    font-weight: normal;
+    font-size: small;
+    color: #1E1E1E ;
+    display: block;
+    text-align: center;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
+}
+
+
+.botonRegistrarseNuevo{
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;   
+}
+
+.detalleEvento{
+    margin-left: 0%;
+    font-family: "TCCC-UnityText-Regular", Calibri;
+    font-size: 18px;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
+}
+
+.imgInstrucciones{
+    width: 100%;
+    margin-left: -20px;
+    margin-top: 15px;
+}
+
+.qr{
+	width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+

@@ -8,19 +8,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="cargaDatos()">
-  <div class="cuerpo">  
+  <!-- <div class="cuerpo">   -->
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <img src="img/Gamification/Gamification_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
-        <div class="titulo">Portal "My Coca Cola World 2023"</div>
+        <div class="titulo">Portal "Coca Cola World"</div>
     </div>
       
     <div class="detalleEvento"> 
-        <hr class="divisionArriba">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
         <div class="margenDerecho">
             Bienvenido: <b id="nombreCompleto"></b>  
-        </div>
+        </div><br>
         <div class="margenDerecho">
             Gracias por escanear el código QR a continuación requieres descargar la presentación en formato PDF para ganar puntos en esta actividad.
         </div>
@@ -35,25 +35,29 @@
             </div>
             <br>
         </div>
-        <hr class="divisionAbajo">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
     </div>
-    <img src="img/muchasMonedas.webp" alt="" class="imagenMonedas">
-    <div class="imagenMonedas">
-        Agregaste la cantidad de:
-        <br><br>
+    <img src="img/Gamification/Gamification_monedas.png" alt="" class="imagenMonedas">
+    <div class="tituloChico">
+        <b>Agregaste la cantidad de:</b>
+        <br>
     </div>
     <div class="tituloNumeroMonedas" id="numTotalMonedas">
-        0 puntos
+        <b id="puntosTotales">0</b>  monedas
     </div>
     <br><br>
     <div class="encabezado">
         <div class="titulo">
-            <!-- En total tienes: <b id="totalPuntos"></b> puntos -->
+            En total tienes: <b id="totalPuntos"></b> puntos
         <br>Sigue participando en más experiencias, para ganar más puntos y así poderlos cambiar por increibles premios.</div>   
     </div>
     <br>
-    <button class="botonContinuar" onclick="regresarWelome()">&ensp;&ensp;Continuar&ensp;&ensp;</button>
+    <!-- <button class="botonContinuar" onclick="regresarWelome()">&ensp;&ensp;Continuar&ensp;&ensp;</button> -->
+    <div class="tituloChico">
+        <img src="img/registro/registro_botonFinal.png" class="botonRegistrarseNuevo" alt="" srcset="" onclick="regresarWelome()">
+    </div>
     <br>
+<!-- </div> -->
     <script src="js/cookie.js"></script>
     <script>
         
@@ -120,11 +124,18 @@
                 const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/sumaPuntos`, settings);
                 const data = await fetchResponse.json();
                 resul = data.statusCode
+                let puntosTotales = data.message[0].puntosTotales
+                let nombreCompleto = data.message[0].nombreCompleto
+                
+                document.getElementById("totalPuntos").innerHTML = puntosTotales
+                document.getElementById("nombreCompleto").innerHTML = nombreCompleto
+                
                 if(resul == 200){
-                    let totalPuntos = data.message[0].totalPuntos
-                    document.getElementById("totalPuntos").innerHTML = totalPuntos 
+                    document.getElementById("numTotalMonedas").innerHTML = "Te hemos agregado " + numPuntos + " puntos"
+                    console.log("Puntos nuevos para esteusuario")
                 }else{
-                    console.log("Error: " + data.message)
+                    document.getElementById("numTotalMonedas").innerHTML = "Código QR ya escenado previamente, invalido."
+                    console.log("Puntos ya asignados a ese usuario")
                 }
             } catch (e) {
                 console.log("Error:" + e)
@@ -132,8 +143,6 @@
             dameExperiencia()
         }
 
-    </script>
-</div>
-    
+    </script>    
 </body>
 </html>

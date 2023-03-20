@@ -516,8 +516,8 @@ var QRCode;
 	 * @example
 	 * var oQRCode = new QRCode("test", {
 	 *    text : "http://naver.com",
-	 *    width : 128,
-	 *    height : 128
+	 *    width : 80,
+	 *    height : 80
 	 * });
 	 * 
 	 * oQRCode.clear(); // Clear the QRCode.
