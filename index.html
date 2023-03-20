@@ -8,21 +8,20 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="cargaDatos()">
-  <div class="cuerpo">  
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <img src="img/registro/registro_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
-        <div class="titulo">Registro de invitados a "My Coca Cola World 2023"</div>
+        <div class="titulo">Registro de invitados a "Coca Cola World"</div>
     </div>
       
     <div class="detalleEvento"> 
-        <hr class="divisionArriba">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
         <div class="margenDerecho">
             Bienvenidos al portal de registro para vivir las experiencias de nuestro stand.
-        <br><br>Compartenos tus datos para poder continuar con la dinámica   
+        <br><br>Compártenos tus datos para poder continuar con la dinámica.   
         </div>
-        <hr class="divisionAbajo">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset="" class="barra">
     </div>
     <div id="registro" class="detalleEvento"></div>
     <div class="obligatoriosdiv">
@@ -32,9 +31,9 @@
     <br>
     <div class="espaciador titulo error rojo" id="mensajeError"></div>
     <br>
-    <button class="botonRegistrarse" onclick="guardaDatos()">&ensp;&ensp;Guardar Registro&ensp;&ensp;</button>
-</div>
-    <script src="js/cookie.js"></script>
+    <!-- <button class="botonRegistrarse" onclick="guardaDatos()">&ensp;&ensp;Guardar Registro&ensp;&ensp;</button> -->
+    <button class="botonRegistrarseNuevo" onclick="guardaDatos()"></button>
+<script src="js/cookie.js"></script>
     <script type="text/javascript">
         let urlServer = "https://mosaico.app:4000/myCocaColaWorld2023/"
         let tipoValidaciones = { 

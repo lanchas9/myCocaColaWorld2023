@@ -67,8 +67,9 @@
             let tiempoFinal = d.getTime();
             let tiempoCuestionario = tiempoFinal - tiempoInicio
 
-            //guardaCookie(true, contador, numPreguntas,tiempoCuestionario)            
-            window.location.href = `resultado.html?numAciertos=${contador}&numPreguntas=${numPreguntas}`;  
+            //guardaCookie(true, contador, numPreguntas,tiempoCuestionario) 
+            const strRespuestas = respuestas.toString();           
+            window.location.href = `resultado.html?respuestas=${strRespuestas}&numAciertos=${contador}&numPreguntas=${numPreguntas}`;  
         }
 
         function guardaCookie(yaContesto, numAciertos, numPreguntas, tiempoCuestionario){
@@ -91,10 +92,10 @@
             // let numPreguntasCookie = getCookie("numPreguntas")
             // let tiempoCuestionario = getCookie("tiempoCuestionario")
             let yaContesto = false
-            if (yaContesto){
-                setCookie("botonRegresar", true, 10);
-                window.location.href = `resultado.html?idUsuario=${idUsuario}&numAciertos=${numAciertosCookie}&numPreguntas=${numPreguntasCookie}&tiempoCuestionario=${tiempoCuestionario}`;  
-            }
+            // if (yaContesto){
+            //     setCookie("botonRegresar", true, 10);
+            //     window.location.href = `resultado.html?idUsuario=${idUsuario}&numAciertos=${numAciertosCookie}&numPreguntas=${numPreguntasCookie}&tiempoCuestionario=${tiempoCuestionario}`;  
+            // }
             
             const settings = {
                 method: 'GET',

@@ -38,13 +38,46 @@
     <!-- </div>   -->
 </div>
     <script type="text/javascript">
-        function creaQR(){
+        async function creaQR(){
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             let numAciertos = parseInt(urlParams.get('numAciertos')) 
             let numPreguntas = parseInt(urlParams.get('numPreguntas')) 
+            let respuestas = urlParams.get('respuestas') 
 
             let puntos = Math.ceil((numAciertos / numPreguntas)*100)
+
+            let resul = {
+                respuestas : respuestas,
+                puntaje: puntos,
+                totalPreguntas : numPreguntas
+            }
+            const data = resul
+            const dataJson = JSON.stringify(data)
+
+            const settings = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: 
+                    dataJson
+            };
+
+            try {
+                    const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/guardaRespuestasTriviaFinal`, settings);
+                    const data = await fetchResponse.json();
+                    if(data.statusCode == 200){
+                            console.log("Guardado con éxito")
+                    }else{
+                            console.log("Error en el guardado")
+                    }
+                } catch (e) {
+                    console.log("Error" + e)
+                }
+
+
 
             let urlImagenQR = `https://mycocacolaworld2023.com/sumaPuntos.html?uuidExperiencias=2512b306-ee46-45a2-bd98-8edd48e6a884&numPuntos=${puntos}`
             // let imagen = document.getElementById("qr")

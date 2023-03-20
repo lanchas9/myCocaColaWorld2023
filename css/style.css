@@ -1,15 +1,15 @@
 @font-face {
-    font-family: "Gotham";
-    src: url('../fonts/GOTHAM-BLACK.OTF') format('truetype');
+    font-family: "TCCC-UnityHeadline-Bold";
+    src: url('../fonts/TCCC-UnityHeadline-Bold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: "Montserrat";
-    src: url('../fonts/Montserrat-Regular.otf') format('truetype');
+    font-family: "TCCC-UnityText-Regular";
+    src: url('../fonts/TCCC-UnityText-Regular.ttf') format('truetype');
 }
 body{
     background-color: #E6EEF2;
-    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+    /* font-family: "Gotham", Calibri, Tahoma, sans-serif; */
     color: #1E1E1E;
 }
 
@@ -27,7 +27,7 @@ body{
 .imagenEncabezado{
     margin-top: 5%;
     margin-bottom: 2%;
-    width: 95%;
+    width: 70%;
 }
 
 .encabezado{
@@ -36,10 +36,12 @@ body{
 
 .titulo{
     font-weight: bold;
-    font-size: x-large;
+    font-size: medium;
     color: #1E1E1E;
     margin-left: 1%;
     margin-right: 1%;
+    margin-top: 5%;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
 }
 
 
@@ -66,9 +68,9 @@ body{
     border: none;
 }
 .detalleEvento{
-    margin-left: 5%;
-    font-family: "Montserrat", Calibri, Tahoma, sans-serif;
-    font-size: 20px;
+    margin-left: 0%;
+    font-family: "TCCC-UnityText-Regular", Calibri;
+    font-size: 12px;
 }
 .margenDerecho{
     margin-right: 5%;
@@ -188,4 +190,16 @@ li:nth-child(odd) { color: #F40009; }
     padding-bottom: 10px;
     display: flex;
     justify-content: center;
+}
+
+.barra{
+    width: 100%;
+    margin-top: 2%;
+}
+
+.botonRegistrarseNuevo{
+    width: 100px;
+    height: 25px;
+    background-image: url(https://mycocacolaworld2023.com/img/registro/registro_boton.png);
+    background-repeat: no-repeat;
 }
