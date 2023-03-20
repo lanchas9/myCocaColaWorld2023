@@ -8,42 +8,47 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="cargaDatos()">
-  <div class="cuerpo">  
+  <!-- <div class="cuerpo">   -->
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <img src="img/Gamification/Gamification_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
-        <div class="titulo">Portal "My Coca Cola World 2023"</div>
+        <div class="titulo">Portal "Coca Cola World"</div>
     </div>
       
     <div class="detalleEvento"> 
-        <hr class="divisionArriba">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
         <div class="margenDerecho">
             Bienvenido: <b id="nombreCompleto"></b>  
         </div>
+        <br>
         <div class="margenDerecho">
             Este es el portal donde encontrarás tus puntos recolectados durante tu visita a nuestro stand.
         </div>
-        <hr class="divisionAbajo">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
     </div>
-    <img src="img/muchasMonedas.webp" alt="" class="imagenMonedas">
-    <div class="imagenMonedas">
-        Tu total de puntos hasta el momento es de:
-        <br><br>
+    <img src="img/Gamification/Gamification_monedas.png" alt="" class="imagenMonedas">
+    <div class="tituloChico">
+        <b>Tu total de monedas es:</b>
+        <br>
     </div>
     <div class="tituloNumeroMonedas" id="numTotalMonedas">
-        <b id="puntosTotales">0</b>  puntos
+        <b id="puntosTotales">0</b>  monedas
     </div>
-    <br><br>
-    <div class="imagenMonedas">
-        Aquí el desgloce de tus puntos por cada experiencia:
+    <br>
+    <div class="tituloChico">
+        <div class="imagenMonedas">
+            Aquí el desgloce de tus monedas por cada experiencia:
+        </div>
+        <div id="tablaPuntos"></div>    
     </div>
-    <div id="tablaPuntos"></div>
     <div class="encabezado">
         <div class="titulo">
-            Participa en más experiencias para ganar más puntos y así poderlos cambiar por increibles premios</div>   
+            Participa en más experiencias para ganar más monedas y así poderlas cambiar por increibles premios
+        </div>   
     </div>
     <br><br><br>
+<!-- </div> -->
     <script src="js/cookie.js"></script>
     <script>
         let nombreCompleto = ""
@@ -113,8 +118,6 @@
 
         }
 
-    </script>
-</div>
-    
+    </script>    
 </body>
 </html>

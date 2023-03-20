@@ -8,9 +8,14 @@
     src: url('../fonts/TCCC-UnityText-Regular.ttf') format('truetype');
 }
 body{
-    background-color: #E6EEF2;
+    
     /* font-family: "Gotham", Calibri, Tahoma, sans-serif; */
     color: #1E1E1E;
+    background: url(../img//registro/registro_back.jpg) no-repeat top center; 
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 .cuerpo{
@@ -46,8 +51,8 @@ body{
 
 
 .divisionArriba{
-    color: #F40009;
-    background-color: #F40009;
+    color: #DC2128;
+    background-color: #DC2128;
     height: 10px;
     margin-left: 0%;
     margin-right: 10%;
@@ -58,8 +63,8 @@ body{
 }
 
 .divisionAbajo{
-    color: #F40009;
-    background-color: #F40009   ;
+    color: #DC2128;
+    background-color: #DC2128   ;
     height: 10px;
     margin-left: 0%;
     margin-right: 10%;
@@ -82,32 +87,35 @@ body{
     margin-top: 1%;
 }
 .obligatorios{
-    font-weight: bold;
-    font-style: italic;
-    color: #F40009;
+    font-size: x-small;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
+    color: #DC2128;
 }
 
 .elmentoFormularioTitulo{
     font-weight: bold;
-    font-size: large;
+    font-size: normal;
     margin-bottom: 5px;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
 }
 
 .asterisc {
-    color: #F40009;
+    color: #DC2128;
     font-size: larger;
 }
 
 .elmentoFormularioinput{
     width: 90%;
     margin-top: 0px;
-    height: 40px;
+    height: 30px;
     background-color: #F7F7F7;
     border: 1px solid #c4c4c4;
     border-radius: 0;
     box-shadow: none;
     color: #787878;
-    font-family: "Gotham", Calibri, Tahoma, sans-serif;
+    font-family: "TCCC-UnityText-Regular", Calibri;
+    text-align: center;
+    font-size: normal;
 }
 .error{
     width: 90%;
@@ -115,7 +123,7 @@ body{
 }
 
 .botonRegistrarse{
-    background: #F40009;
+    background: #DC2128;
     border: 0;
     color: #f7f7f7;
     height: 50px;
@@ -128,7 +136,7 @@ body{
 }
 
 .botonContinuar{
-    background: #F40009;
+    background: #DC2128;
     border: 0;
     color: #f7f7f7;
     height: 50px;
@@ -145,20 +153,31 @@ body{
 .imagenMonedas{
     display: block;
     max-width: 300px;
-    width: 80%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
-.tituloNumeroMonedas{
-    font-weight: bold;
-    font-size: xx-large;
-    color: #F40009;
+.tituloChico{
+    font-weight: normal;
+    font-size: small;
+    color: #1E1E1E ;
     display: block;
     text-align: center;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
+}
+
+.tituloNumeroMonedas{
+    font-weight: 800;
+    font-size: xx-large;
+    color: #DC2128;
+    display: block;
+    text-align: center;
+    font-family: "TCCC-UnityHeadline-Bold", Calibri;
 }
 
 .rojo{
-    color: #F40009;
+    color: #DC2128;
 }
 
 .renglonTablaExperiencias{
@@ -175,7 +194,7 @@ body{
     font-family: "Montserrat", Calibri, Tahoma, sans-serif;
 }
 
-li:nth-child(odd) { color: #F40009; }
+li:nth-child(odd) { color: #DC2128; }
 
 .qr{
 	width: 30%;
@@ -198,8 +217,7 @@ li:nth-child(odd) { color: #F40009; }
 }
 
 .botonRegistrarseNuevo{
-    width: 100px;
-    height: 25px;
-    background-image: url(https://mycocacolaworld2023.com/img/registro/registro_boton.png);
-    background-repeat: no-repeat;
+    max-width: 150px;
+    width: 40%;
+    
 }

@@ -8,26 +8,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="cargaDatos()">
-  <div class="cuerpo">  
+  <!-- <div class="cuerpo">   -->
     <div class="encabezado">
-        <img src="img/header.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <img src="img/Gamification/Gamification_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
-        <div class="titulo">Portal "My Coca Cola World 2023"</div>
+        <div class="titulo">Portal "Coca Cola World"</div>
     </div>
       
     <div class="detalleEvento"> 
-        <hr class="divisionArriba">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
+        
+        <br>
         <div class="margenDerecho">
-            <b id="nombreCompleto">Reporte</b>  
-        </div><br>
-        <div class="margenDerecho">
-            Usuarios con más puntos ganados
+            Reporte usuarios con más monedas
         </div>
-        <hr class="divisionAbajo">
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
     </div>
-    <div id="tablaPuntos"></div>
+    <div class="tituloChico">
+        <div id="tablaPuntos"></div>
+    </div>
     <br><br><br>
+<!-- </div> -->
+    
     <script src="js/cookie.js"></script>
     <script>
         let nombreCompleto = ""
@@ -64,7 +67,6 @@
         }
 
     </script>
-</div>
-    
+
 </body>
 </html>
