@@ -9,7 +9,7 @@
 </head>
 <body onload="cargaDatos()">
   <!-- <div class="cuerpo">   -->
-    <div>
+    <div class="encabezado">
         <img src="img/Gamification/Gamification_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
         <br>
 		<!-- <hr class="lineaAzul"/> -->
@@ -22,16 +22,23 @@
             Bienvenido: <b id="nombreCompleto"></b>  
         </div><br>
         <div class="margenDerecho">
-            Gracias por escanear el código QR a continuación requieres descargar la presentación en formato PDF para ganar puntos en esta actividad.
+            Gracias por escanear el código QR.<br>A continuación requieres descargar la presentación en formato PDF para ganar puntos en esta actividad.
         </div>
         <div id="elementoClickeableLinkWeb">
             <br>
             <div class="margenDerecho encabezado">
-                <a id="linkWeb" href="" download>
-                    <b class="">
-                        ➡️ 🗎 MyCocaColaWorld2023.pdf
+                <div class="tituloChico">Descarga PDF experienca:</div>
+                <a class="a" id="linkWeb" href="" download>
+                    <b class="" id="linkWebNombre">
+                         📝 MyCocaColaWorld2023.pdf 
                     </b>
-                </a>
+                <!-- </a><br><br>
+                <div class="tituloChico">Descarga PDF Estrategia Exclusiva OXXO:</div>
+                <a class="a" id="linkWeb2" href="https://mycocacolaworld2023.com/pdf/QR_PACE.pdf" download="QR_PACE.pdf">
+                    <b class="">
+                        ❗ 📝 ExclusivoOXXO.pdf ❗
+                    </b>
+                </a> -->
             </div>
             <br>
         </div>
@@ -77,7 +84,9 @@
                 resul = data.statusCode
                 if(resul == 200){
                     let urlExperiencias = data.message[0].urlExperiencias
-                    document.getElementById("linkWeb").href = urlExperiencias 
+                    document.getElementById("linkWeb").href = urlExperiencias
+                    document.getElementById("linkWebNombre").innerHTML = "📝 " + urlExperiencias.substring(urlExperiencias.lastIndexOf('/') + 1, urlExperiencias.length);
+                    document.getElementById("linkWeb").download =  urlExperiencias.substring(urlExperiencias.lastIndexOf('/') + 1, urlExperiencias.length);
                 }else{
                     console.log("Puntos ya agregados: " + data.message)
                 }
@@ -132,9 +141,9 @@
                 
                 if(resul == 200){
                     document.getElementById("numTotalMonedas").innerHTML = "Te hemos agregado " + numPuntos + " puntos"
-                    console.log("Puntos nuevos para esteusuario")
+                    console.log("Puntos nuevos para este usuario")
                 }else{
-                    document.getElementById("numTotalMonedas").innerHTML = "Código QR ya escenado previamente, invalido."
+                    document.getElementById("numTotalMonedas").innerHTML = "Código QR ya escaneado previamente, inválido."
                     console.log("Puntos ya asignados a ese usuario")
                 }
             } catch (e) {
