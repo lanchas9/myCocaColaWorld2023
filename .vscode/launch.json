@@ -10,6 +10,13 @@
             "name": "LiveServer",
             "url": "http://localhost:5500/visualizaDocumentoWeb.html?uuidExperiencias=f5bea326-c8ef-46d6-b041-cc0e77625814&numPuntos=50",
             "webRoot": "${workspaceFolder}/"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Reporte",
+            "url": "http://localhost:5500/reporteTodosUsuarios.html",
+            "webRoot": "${workspaceFolder}/"
         }
     ]
 }

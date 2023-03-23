@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCocaColaWorld2023</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="cargaDatos()" >
+  <!-- <div class="cuerpo">   -->
+    <div class="encabezado">
+        <img src="img/Gamification/Gamification_effect.png" class="imagenEncabezado" onclick="borraCookie()"/>
+        <br>
+		<!-- <hr class="lineaAzul"/> -->
+        <div class="titulo">Portal "Coca-Cola World"</div>
+    </div>
+      
+    <div class="detalleEvento"> 
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
+        
+        <br>
+        <div class="margenDerecho">
+            Reporte todos los usuarios y el premio asignado hasta el momento
+        </div>
+        <img src="img/registro/registro_lineasSingle.png" alt="" srcset=""class="barra">
+    </div>
+    <div class="tituloChico">
+        <div id="tablaPuntos"></div>
+    </div>
+    <br><br><br>
+<!-- </div> -->
+    
+    <script src="js/cookie.js"></script>
+    <script>
+        let nombreCompleto = ""
+        let listaPremios
+        function borraCookie(){
+            setCookie("uuidUsuarios", "",10)
+        }
+
+        async function cargaCVS(){
+            let cvs = `Podio ,Material,Texto breve de material,Corto,SOLICITA,COSTO UNITARIO,TOTAL
+1 y 2 ,,PlayStation Consola PlayStation 5 PS5,PlayStation 5,2," $19,500.00 "," $39,000.00 "
+3,,Hisense Pantalla 50 pulgadas Plana LED 4K,Pantalla LED 4K,1," $13,300.00 "," $13,300.00 "
+4 y 5 ,,Consola Nintendo Switch Neón 32 GB,Nintendo Switch,2," $11,740.00 "," $23,480.00 "
+6 al 26 ,254351,SUDADERA GRIS CC C/ZIPPER,SUDADERA GRIS,20, $800.00 ," $16,000.00 "
+27 al 47 ,254365,SUDADERA COLORES CC GRABADO PUFF,SUDADERA COLORES ,20, $700.00 ," $14,000.00 "
+48 al 68 ,254365,SUDADERA COLORES CC GRABADO PUFF,SUDADERA COLORES,20, $700.00 ," $14,000.00 "
+69 al 89 ,254350,SUDADERA CC ROJA C/LOGO BORDADO,SUDADERA CC ROJA BORDADA,20, $650.00 ," $13,000.00 "
+90 al 100 ,251155,CHAMARRA DAMA,CHAMARRA DAMA,10, $580.00 ," $5,800.00 "
+101 al 121 ,251535,CARTERA VIAJE PIEL FINA LOGO COCA COLA,CARTERA PIEL,20, $440.00 ," $8,800.00 "
+122 al 137 ,253050,SUDADERA ROJA COCA COLA FABRICANTE CONFE,SUDADERA ROJA COCA COLA,15, $350.00 ," $5,250.00 "
+138 al 148 ,254236,FRAZADA ABORREGADA COCA COLA,FRAZADA ABORREGADA,10, $330.00 ," $3,300.00 "
+149 al 174 ,251078,MALETA DEPORTIVA COCA COLA IMPRESA,MALETA DEPORTIVA,25, $300.00 ," $7,500.00 "
+175 al 190 ,254002,SET ORGANIZADOR MALETAS,SET ORGANIZADOR MALETAS,15, $300.00 ," $4,500.00 "
+191 al 211,254045,TERMO CC FRIO/CALIENTE 30 OZ,TERMO CC FRIO/CALIENTE 30 OZ,20, $295.00 ," $5,900.00 "
+212 al 232,254192,TERMO FORMA BOTELLA CC,TERMO FORMA BOTELLA CC,20, $270.00 ," $5,400.00 "
+233 al 248,254044,TERMO CC FRIO/CALIENTE 20 OZ,TERMO CC FRIO/CALIENTE 20 OZ,15, $260.00 ," $3,900.00 "
+249 al 259,253979,POWER BANKS LATA COCA COLA,POWER BANKS,10, $260.00 ," $2,600.00 "
+260 al 270,254337,LONCHERA C/BOLSA LATERAL MALLA CC,LONCHERA C/BOLSA,10, $245.00 ," $2,450.00 "
+`;
+        let global = 0
+        
+        let array = cvs.split(`\n`).map(function (line, index) {
+            let mini  = []
+            let cantidad = 0
+            let str = ""
+            if(index > 0)
+            {
+                line.split(",").forEach((element, index) => {
+                    if(index == 4){
+                        cantidad = parseInt(element)
+                    }
+                    if(index == 1){
+                        str = element + " "
+                    }
+                    if(index == 3){
+                        str = element
+                    }
+                });
+                for (var i = 1; i <= cantidad; i++){
+                    global++
+                    mini.push(global + ".- " + str)
+                }
+            }
+            return mini
+            //return line.split(",");
+        });
+        listaPremios = array.flat()
+        // console.log({listaPremios})
+        // let cantidadPremios = listaPremios.length
+        // console.log({cantidadPremios})
+
+        }
+
+        async function cargaDatos(){
+            cargaCVS()                
+            try {
+                const fetchResponse = await fetch(`https://mosaico.app:4000/myCocaColaWorld2023/reporteTopUsuariosConPuntos?limit=95`);
+                const data = await fetchResponse.json();
+                resul = data.statusCode
+                if(resul == 200){
+                    let tabla = data.message
+                    let tablaExperiencias = document.createElement("ul")
+                    
+                    tabla.forEach((element, index) => {
+                        
+                        let renglon = document.createElement("li")
+                        renglon.innerHTML = listaPremios[index] + "  ➡  " + element.nombreCompleto + " - " + element.nombreEmpresa + "  ➡  " + (element.puntosTotales === null ? 0 : element.puntosTotales) + " puntos"
+                        renglon.className = "renglonTablaExperiencias"
+                        tablaExperiencias.appendChild(renglon)
+                    });
+                    document.getElementById("tablaPuntos").appendChild(tablaExperiencias)
+                    
+                }else{
+                    console.log("Error: " + data.message)
+                }
+            } catch (e) {
+                console.log("Error:" + e)
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
